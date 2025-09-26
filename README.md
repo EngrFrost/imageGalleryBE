@@ -1,98 +1,236 @@
+# 🏥 HIPAA Testing - AI-Powered Image Management System
+
 <p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
+  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="60" alt="NestJS" /></a>
+  <span style="margin: 0 20px; font-size: 24px;">+</span>
+  <a href="https://www.postgresql.org/" target="blank"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/postgresql/postgresql-original-wordmark.svg" width="60" alt="PostgreSQL" /></a>
+  <span style="margin: 0 20px; font-size: 24px;">+</span>
+  <a href="https://cloudinary.com/" target="blank"><img src="https://cloudinary.com/favicon.ico" width="60" alt="Cloudinary" /></a>
 </p>
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
-
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
+<p align="center">
+  A secure, AI-powered image management system built with NestJS, featuring automated image analysis, tagging, and advanced search capabilities with HIPAA compliance considerations.
 </p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
-## Description
+<p align="center">
+  <a href="#-quick-start">Quick Start</a> •
+  <a href="#-features">Features</a> •
+  <a href="#-documentation">Documentation</a> •
+  <a href="#-api-endpoints">API</a> •
+  <a href="#-tech-stack">Tech Stack</a>
+</p>
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## 🌟 Features
 
-## Project setup
+- **🔐 Secure Authentication**: JWT-based authentication with bcrypt password hashing
+- **🤖 AI-Powered Analysis**: Automated image tagging, color extraction, and description generation
+- **🔍 Advanced Search**: Search by tags, colors, descriptions, and image similarity
+- **🏥 HIPAA Ready**: Row Level Security (RLS) policies for data isolation
+- **📊 Smart Filtering**: Filter images by color, content, and metadata
+- **⚡ High Performance**: Optimized queries with Prisma ORM and PostgreSQL
+- **🌐 Global CDN**: Fast image delivery through Cloudinary's global network
+- **🔄 Real-time Processing**: Instant AI analysis upon image upload
 
-```bash
-$ npm install
+## 📋 Description
+
+A comprehensive image management system that combines secure storage with intelligent AI analysis. Built for healthcare and enterprise environments where data security and advanced image processing capabilities are essential.
+
+## 🚀 Quick Start
+
+1. **Clone and install dependencies**
+   ```bash
+   git clone <your-repository-url>
+   cd hipaa-testing
+   npm install
+   ```
+
+2. **Set up environment**
+   ```bash
+   cp env.example .env
+   # Edit .env with your configuration (see API_KEYS.md)
+   ```
+
+3. **Set up database**
+   ```bash
+   npx prisma migrate dev
+   npx prisma generate
+   ```
+
+4. **Start development server**
+   ```bash
+   npm run start:dev
+   ```
+
+5. **Access the API**
+   - API Base: `http://localhost:8000/api`
+   - Upload images, get AI analysis, and search with advanced filters
+
+## 📚 Documentation
+
+| Document | Description |
+|----------|-------------|
+| **[📖 SETUP.md](./SETUP.md)** | Complete setup instructions and troubleshooting |
+| **[🔑 API_KEYS.md](./API_KEYS.md)** | API keys configuration and security best practices |
+| **[🏗️ ARCHITECTURE.md](./ARCHITECTURE.md)** | System architecture and design decisions |
+| **[🤖 AI_SERVICES.md](./AI_SERVICES.md)** | AI service comparison and recommendations |
+
+## 🔌 API Endpoints
+
+### Authentication
+```http
+POST /api/auth/register    # Create new user account
+POST /api/auth/login       # User authentication
 ```
 
-## Compile and run the project
-
-```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+### Images
+```http
+POST /api/images/upload    # Upload images with AI processing
+GET  /api/images          # Get images with filtering options
 ```
 
-## Run tests
+**Query Parameters for GET /api/images:**
+- `page` - Page number for pagination
+- `limit` - Items per page (default: 12)
+- `color` - Filter by dominant color (e.g., "blue", "red")
+- `search` - Search in tags and descriptions
+- `similarTo` - Find images similar to a specific image ID
 
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+### Users
+```http
+GET /api/users/profile     # Get user profile
+PUT /api/users/profile     # Update user profile
 ```
 
-## Deployment
+## 🛠️ Tech Stack
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
+### Backend
+- **[NestJS](https://nestjs.com/)** - Enterprise Node.js framework
+- **[TypeScript](https://www.typescriptlang.org/)** - Type-safe development
+- **[PostgreSQL](https://www.postgresql.org/)** - Advanced SQL database
+- **[Prisma](https://www.prisma.io/)** - Type-safe ORM
+- **[JWT](https://jwt.io/)** - Secure authentication
 
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+### AI & Storage
+- **[Cloudinary](https://cloudinary.com/)** - AI-powered media management
+- **Auto-tagging** - Intelligent image categorization
+- **Color Analysis** - Dominant color extraction
+- **Image Captioning** - AI-generated descriptions
+
+### Security
+- **Row Level Security (RLS)** - Database-level data isolation
+- **bcrypt** - Password hashing
+- **CORS** - Cross-origin protection
+- **Input validation** - Request sanitization
+
+## 🧪 Testing
 
 ```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
+# Unit tests
+npm run test
+
+# E2E tests
+npm run test:e2e
+
+# Test coverage
+npm run test:cov
+
+# Watch mode
+npm run test:watch
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+## 🏥 HIPAA Compliance Features
 
-## Resources
+- **Data Isolation**: Row Level Security policies
+- **Secure Authentication**: JWT with strong password hashing
+- **Audit Trail**: Comprehensive logging (planned)
+- **Access Controls**: User-based data access
+- **Encryption**: In-transit and at-rest data protection
 
-Check out a few resources that may come in handy when working with NestJS:
+## 🌟 Key Features in Detail
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+### AI-Powered Image Analysis
+- **Smart Tagging**: Automatically identifies objects, scenes, and concepts
+- **Color Intelligence**: Extracts dominant colors for visual search
+- **Content Understanding**: Generates descriptive captions
+- **Similarity Search**: Find visually similar images
 
-## Support
+### Advanced Search & Filtering
+```javascript
+// Example API usage
+GET /api/images?color=blue&search=nature&page=1&limit=10
+```
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+### Performance Optimizations
+- **Efficient Queries**: Optimized database indexes
+- **CDN Delivery**: Global content distribution
+- **Caching Strategy**: Planned Redis integration
+- **Pagination**: Large dataset handling
 
-## Stay in touch
+## 🚀 Development & Deployment
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+### Development
+```bash
+npm run start:dev    # Watch mode with auto-reload
+npm run start:debug  # Debug mode
+```
 
-## License
+### Production
+```bash
+npm run build        # Compile TypeScript
+npm run start:prod   # Production server
+```
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+### Docker (Planned)
+```bash
+docker-compose up    # Full stack deployment
+```
+
+## 📈 Roadmap
+
+### Phase 1 (Current)
+- ✅ Core image upload and AI analysis
+- ✅ User authentication and authorization  
+- ✅ Advanced search and filtering
+- ✅ HIPAA-ready security architecture
+
+### Phase 2 (Upcoming)
+- 🔄 Real-time notifications
+- 🔄 Batch processing
+- 🔄 Enhanced error handling
+- 🔄 API documentation (Swagger)
+
+### Phase 3 (Future)
+- 📋 Advanced AI features (facial recognition, OCR)
+- 📋 Multi-tenant architecture
+- 📋 Performance analytics
+- 📋 Mobile API optimization
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## 📝 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🆘 Support & Resources
+
+- 📖 Check the [SETUP.md](./SETUP.md) for detailed setup instructions
+- 🔑 Review [API_KEYS.md](./API_KEYS.md) for configuration help
+- 🏗️ Read [ARCHITECTURE.md](./ARCHITECTURE.md) to understand the system design
+- 🤖 See [AI_SERVICES.md](./AI_SERVICES.md) for AI service options
+
+**Additional Resources:**
+- [NestJS Documentation](https://docs.nestjs.com) - Framework documentation
+- [Prisma Documentation](https://www.prisma.io/docs) - Database ORM guides
+- [Cloudinary Documentation](https://cloudinary.com/documentation) - AI and media management
+
+---
+
+<p align="center">
+  Made with ❤️ for secure, intelligent image management
+</p>
