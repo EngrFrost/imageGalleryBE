@@ -1,26 +1,39 @@
 import {
   Controller,
+  Get,
   Post,
-  UploadedFile,
+  UploadedFiles,
   UseGuards,
   UseInterceptors,
   Request,
+  Query,
 } from '@nestjs/common';
-import { FileInterceptor } from '@nestjs/platform-express';
-import { ImageService } from './image.service.js';
-import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard.js';
+import { FilesInterceptor } from '@nestjs/platform-express';
+import { ImageService } from './image.service';
+import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
+import { ImageFilterDto } from './image.dto';
 
-@Controller('image')
+@Controller('images')
 export class ImageController {
   constructor(private readonly imageService: ImageService) {}
 
+  @Get()
+  @UseGuards(JwtAuthGuard)
+  getImages(
+    @Request() req: { user: { userId: string } },
+    @Query() query: ImageFilterDto,
+  ) {
+    return this.imageService.getImagesByUserId(req.user.userId, query);
+  }
+
   @Post('upload')
   @UseGuards(JwtAuthGuard)
-  @UseInterceptors(FileInterceptor('file'))
-  uploadImage(
-    @UploadedFile() file: any,
+  @UseInterceptors(FilesInterceptor('images'))
+  uploadImages(
+    @UploadedFiles()
+    files: Array<Express.Multer.File>,
     @Request() req: { user: { userId: string } },
   ) {
-    return this.imageService.uploadImage(file, req.user.userId);
+    return this.imageService.uploadImages(files, req.user.userId);
   }
 }
