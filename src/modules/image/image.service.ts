@@ -51,24 +51,84 @@ export class ImageService {
   }
 
   async getImagesByUserId(userId: string, options: ImageFilterDto) {
-    const { limit = 12, offset = 0, color, page } = options;
+    const { limit = 12, offset = 0, color, search, similarTo, page } = options;
 
-    const where: {
-      userId: string;
-      metadata?: { colors: { has: string } };
-    } = { userId };
+    const where: any = { userId };
+    const metadataConditions: any[] = [];
+
+    // Color filter
     if (color) {
-      where.metadata = {
+      metadataConditions.push({
         colors: {
           has: color.toLowerCase(),
         },
+      });
+    }
+
+    // Text search (search in tags and description)
+    if (search) {
+      const searchLower = search.toLowerCase();
+      metadataConditions.push({
+        OR: [
+          {
+            tags: {
+              hasSome: searchLower.split(' '),
+            },
+          },
+          {
+            tags: {
+              has: searchLower,
+            },
+          },
+          {
+            description: {
+              contains: search,
+              mode: 'insensitive',
+            },
+          },
+        ],
+      });
+    }
+
+    // Similar image search (find images with overlapping colors/tags)
+    if (similarTo) {
+      const sourceImage = await this.prisma.image.findFirst({
+        where: { id: similarTo, userId },
+        include: { metadata: true },
+      });
+
+      if (sourceImage?.metadata) {
+        metadataConditions.push({
+          OR: [
+            {
+              colors: {
+                hasSome: sourceImage.metadata.colors,
+              },
+            },
+            {
+              tags: {
+                hasSome: sourceImage.metadata.tags,
+              },
+            },
+          ],
+        });
+        // Exclude the source image itself
+        where.id = { not: similarTo };
+      }
+    }
+
+    if (metadataConditions.length > 0) {
+      where.metadata = {
+        AND: metadataConditions,
       };
     }
+
+    const offsetComputed = (page - 1) * limit;
 
     const [images, total] = await this.prisma.$transaction([
       this.prisma.image.findMany({
         where,
-        skip: offset,
+        skip: offsetComputed,
         take: limit,
         include: {
           metadata: true,
