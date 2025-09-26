@@ -40,7 +40,7 @@ A comprehensive image management system that combines secure storage with intell
 1. **Clone and install dependencies**
    ```bash
    git clone <your-repository-url>
-   cd hipaa-testing
+   cd your-name
    npm install
    ```
 
@@ -199,6 +199,7 @@ npm run start:debug  # Debug mode
 - [NestJS Documentation](https://docs.nestjs.com) - Framework documentation
 - [Prisma Documentation](https://www.prisma.io/docs) - Database ORM guides
 - [Cloudinary Documentation](https://cloudinary.com/documentation) - AI and media management
+
 
 
 
