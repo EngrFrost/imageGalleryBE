@@ -1,6 +1,6 @@
 import { Injectable, Logger } from '@nestjs/common';
-import { CloudinaryService } from './cloudinary.service';
-import { PrismaService } from './prisma/prisma.service';
+import { CloudinaryService } from '../cloudinary/cloudinary.service';
+import { PrismaService } from '../../prisma/prisma.service';
 
 interface MulterFile {
   fieldname: string;

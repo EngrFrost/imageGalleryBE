@@ -7,8 +7,8 @@ import {
   Request,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { JwtAuthGuard } from './auth/guards/jwt-auth.guard.js';
 import { ImageService } from './image.service.js';
+import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard.js';
 
 @Controller('image')
 export class ImageController {

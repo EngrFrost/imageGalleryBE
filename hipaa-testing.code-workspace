@@ -8,6 +8,9 @@
 		},
 		{
 			"path": "../../dexio/griffin"
+		},
+		{
+			"path": "../../dexio/pegasus"
 		}
 	],
 	"settings": {}

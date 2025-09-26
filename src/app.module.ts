@@ -1,15 +1,14 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import { AuthModule } from './auth/auth.module';
+
 import { PrismaModule } from './prisma/prisma.module';
-import { UserModule } from './user/user.module';
-import { ImageModule } from './image.module';
-import { ImageController } from './image.controller';
-import { ImageService } from './image.service';
-import { CloudinaryModule } from './cloudinary.module';
-import { CloudinaryService } from './cloudinary.service';
+import { ImageModule } from './modules/image/image.module';
+import { ImageController } from './modules/image/image.controller';
+import { ImageService } from './modules/image/image.service';
+import { CloudinaryModule } from './modules/cloudinary/cloudinary.module';
+import { CloudinaryService } from './modules/cloudinary/cloudinary.service';
+import { AuthModule } from './modules/auth/auth.module';
+import { UserModule } from './modules/user/user.module';
 
 @Module({
   imports: [
@@ -20,7 +19,7 @@ import { CloudinaryService } from './cloudinary.service';
     ImageModule,
     CloudinaryModule,
   ],
-  controllers: [AppController, ImageController],
-  providers: [AppService, ImageService, CloudinaryService],
+  controllers: [ImageController],
+  providers: [ImageService, CloudinaryService],
 })
 export class AppModule {}
