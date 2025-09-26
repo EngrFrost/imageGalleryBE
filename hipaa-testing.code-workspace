@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../imageGallery"
+		},
+		{
+			"path": "../../dexio/griffin"
+		}
+	],
+	"settings": {}
+}
