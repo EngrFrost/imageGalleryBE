@@ -25,7 +25,7 @@
 - **🔐 Secure Authentication**: JWT-based authentication with bcrypt password hashing
 - **🤖 AI-Powered Analysis**: Automated image tagging, color extraction, and description generation
 - **🔍 Advanced Search**: Search by tags, colors, descriptions, and image similarity
-- **🏥 HIPAA Ready**: Row Level Security (RLS) policies for data isolation
+- **🏥 SUPABASE Ready**: Row Level Security (RLS) policies for data isolation
 - **📊 Smart Filtering**: Filter images by color, content, and metadata
 - **⚡ High Performance**: Optimized queries with Prisma ORM and PostgreSQL
 - **🌐 Global CDN**: Fast image delivery through Cloudinary's global network
@@ -234,4 +234,5 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 <p align="center">
   Made with ❤️ for secure, intelligent image management
 </p>
+
 
