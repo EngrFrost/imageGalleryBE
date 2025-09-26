@@ -1,4 +1,4 @@
-# 🏥 HIPAA Testing - AI-Powered Image Management System
+# 🏥 Image Gallery - AI-Powered Image Management System
 
 <p align="center">
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="60" alt="NestJS" /></a>
@@ -234,3 +234,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 <p align="center">
   Made with ❤️ for secure, intelligent image management
 </p>
+
